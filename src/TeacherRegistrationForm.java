@@ -29,7 +29,7 @@ public class TeacherRegistrationForm extends JFrame {
         JLabel nameLabel = new JLabel("Teacher Name");
         nameLabel.setBounds(20, 60, 100, 20);
         add(nameLabel);
-
+        
         nameField = new JTextField();
         nameField.setBounds(150, 60, 200, 20);
         add(nameField);
@@ -37,7 +37,7 @@ public class TeacherRegistrationForm extends JFrame {
         JLabel idLabel = new JLabel("ID");
         idLabel.setBounds(370, 60, 20, 20);
         add(idLabel);
-
+        
         idField = new JTextField();
         idField.setBounds(400, 60, 50, 20);
         add(idField);
@@ -45,7 +45,7 @@ public class TeacherRegistrationForm extends JFrame {
         JLabel deptLabel = new JLabel("Department");
         deptLabel.setBounds(20, 90, 100, 20);
         add(deptLabel);
-
+        
         String[] departments = {"Informatics and Systemology", "Mathematics", "Physics", "Chemistry"};
         deptComboBox = new JComboBox<>(departments);
         deptComboBox.setBounds(150, 90, 200, 20);
@@ -54,7 +54,7 @@ public class TeacherRegistrationForm extends JFrame {
         JLabel birthLabel = new JLabel("Year of Birth");
         birthLabel.setBounds(20, 120, 100, 20);
         add(birthLabel);
-
+        
         birthField = new JTextField();
         birthField.setBounds(150, 120, 200, 20);
         add(birthField);
@@ -62,7 +62,7 @@ public class TeacherRegistrationForm extends JFrame {
         JLabel expLabel = new JLabel("Year of experience");
         expLabel.setBounds(20, 150, 130, 20);
         add(expLabel);
-
+        
         expField = new JTextField();
         expField.setBounds(150, 150, 200, 20);
         add(expField);
@@ -70,7 +70,7 @@ public class TeacherRegistrationForm extends JFrame {
         JLabel statusLabel = new JLabel("Marital status");
         statusLabel.setBounds(20, 180, 100, 20);
         add(statusLabel);
-
+        
         String[] statusOptions = {"Married", "Single", "Divorsed","Widoved"};
         statusComboBox = new JComboBox<>(statusOptions);
         statusComboBox.setBounds(150, 180, 200, 20);
@@ -96,7 +96,7 @@ public class TeacherRegistrationForm extends JFrame {
                 System.exit(0);
             }
         });
-
+        
         // Додавання обробника подій для кнопки додавання
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -104,7 +104,7 @@ public class TeacherRegistrationForm extends JFrame {
                 addTeacherToDatabase();
             }
         });
-
+        
         // Додавання обробника подій для кнопки DATABASE
         dbButton.addActionListener(new ActionListener() {
             @Override
@@ -124,7 +124,7 @@ public class TeacherRegistrationForm extends JFrame {
         int yearOfExperience = Integer.parseInt(expField.getText());
         String maritialStatus = (String) statusComboBox.getSelectedItem();
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://root:3306/ad1", "root", "12345")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/teacherdb", "root", "")) {
             String query = "INSERT INTO teachers (teachername, department, yearofbirth, yearofexperience, maritialstatus) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, teacherName);
@@ -136,7 +136,6 @@ public class TeacherRegistrationForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Teacher added successfully!");
         } catch (SQLException ex) {
             ex.printStackTrace();
-
             JOptionPane.showMessageDialog(this, "Error adding teacher to database.");
         }
     }
