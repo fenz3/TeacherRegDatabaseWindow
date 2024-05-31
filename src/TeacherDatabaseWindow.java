@@ -27,7 +27,7 @@ public class TeacherDatabaseWindow extends JFrame {
         JButton backButton = new JButton("BACK");
         backButton.setBounds(20, 10, 100, 30);
         add(backButton);
-
+        
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,7 +44,7 @@ public class TeacherDatabaseWindow extends JFrame {
         JButton searchButton = new JButton("SEARCH");
         searchButton.setBounds(370, 50, 100, 30);
         add(searchButton);
-
+        
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,7 +56,7 @@ public class TeacherDatabaseWindow extends JFrame {
         JButton deleteButton = new JButton("DELETE");
         deleteButton.setBounds(480, 50, 100, 30);
         add(deleteButton);
-
+        
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,7 +79,7 @@ public class TeacherDatabaseWindow extends JFrame {
     }
 
     private void loadTeachers() {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://root:3306/ad1", "root", "12345")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/teacherdb", "root", "")) {
             String query = "SELECT * FROM teachers";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
